@@ -7,17 +7,26 @@ export class AppService {
 
   onApplicationBootstrap(){
     try {
-      console.log('here');
-      
-      // const d = this.pdfService.generatePDFToFile('example','new-pdf.pdf',{
-      //   locals: {
-      //     name: 'Mahesh'
-      //   }
-      // });
-      // d.subscribe(observer => {
-      //   console.log({observer})
-      // })
-      // console.log({d})
+      this.pdfService.generatePDFToStream('example',{
+        locals: {
+          name: 'Mahesh'
+        }
+      }).subscribe(value =>  {
+        console.log({value});
+        //code for s3 upload
+//         const params = {
+//           Key: 'foo.pdf',
+//           Body: stream,
+//           Bucket: 'Bucket Name',
+//           ContentType: 'application/pdf',
+//       };
+// s3.upload(params, (err, res) => {
+//           if (err) {
+//               console.log(err, 'err');
+//           }
+//           console.log(res, 'res');
+//       });
+      });
     } catch (error) {
       console.log({error})
     }
